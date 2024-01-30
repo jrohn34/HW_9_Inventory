@@ -1,0 +1,4 @@
+123,1000.0,Fender,Stratocaster,Electric,Alder,Maple
+456,1200.0,Gibson,Les Paul,Electric,Mahogany,Maple
+101,800.0,Taylor,Acoustic-1,Acoustic,Mahogany,Spruce
+102,900.0,Martin,Acoustic-2,Acoustic,Rosewood,Cedar
