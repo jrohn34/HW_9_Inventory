@@ -30,7 +30,6 @@ public class InventoryRepository {
             appendToFile(path, data + NEW_LINE);
             return true;
         } catch (IOException e) {
-            // Log the error or handle it appropriately
             System.err.println("Error adding guitar to file: " + e.getMessage());
             return false;
         }

@@ -22,20 +22,19 @@ public class InventoryRepositoryTest {
         inventoryRepository = new InventoryRepository(TEST_DATABASE_NAME);
     }
 
-
     @Test
     public void testAddGuitar() throws IOException {
-        Guitar testGuitar = new Guitar("123", 1000.0, "Fender", "Stratocaster", "Electric", "Alder", "Maple");
+        Guitar testGuitar = new Guitar("123", 1000.0, Guitar.Builder.FENDER.toString(), "Stratocaster", Guitar.Type.ELECTRIC.toString(), Guitar.Wood.ALDER.toString(), Guitar.Wood.MAPLE.toString());
         boolean result = inventoryRepository.addGuitar(testGuitar);
         assertTrue(result);
         List<String> lines = Files.readAllLines(Paths.get(TEST_DATABASE_NAME));
         assertEquals(1, lines.size());
-        assertEquals("123,1000.0,Fender,Stratocaster,Electric,Alder,Maple", lines.get(0));
+        assertEquals("123,1000.0,Fender,Stratocaster,electric,Alder,Maple", lines.get(0));
     }
 
     @Test
     public void testGetGuitar() throws IOException {
-        Guitar testGuitar = new Guitar("456", 1200.0, "Gibson", "Les Paul", "Electric", "Mahogany", "Maple");
+        Guitar testGuitar = new Guitar("456", 1200.0, Guitar.Builder.GIBSON.toString(), "Les Paul", Guitar.Type.ELECTRIC.toString(), Guitar.Wood.MAHOGANY.toString(), Guitar.Wood.MAPLE.toString());
         inventoryRepository.addGuitar(testGuitar);
         Guitar result = inventoryRepository.getGuitar("456");
         assertNotNull(result);
@@ -50,18 +49,18 @@ public class InventoryRepositoryTest {
 
     @Test
     public void testSearch() throws IOException {
-        Guitar testGuitar1 = new Guitar("101", 800.0, "Taylor", "Acoustic-1", "Acoustic", "Mahogany", "Spruce");
-        Guitar testGuitar2 = new Guitar("102", 900.0, "Martin", "Acoustic-2", "Acoustic", "Rosewood", "Cedar");
+        Guitar testGuitar1 = new Guitar("101", 800.0, Guitar.Builder.MARTIN.toString(), "Acoustic-1", Guitar.Type.ACOUSTIC.toString(), Guitar.Wood.MAHOGANY.toString(), Guitar.Wood.MAPLE.toString());
+        Guitar testGuitar2 = new Guitar("102", 900.0, Guitar.Builder.RYAN.toString(), "Acoustic-2", Guitar.Type.ACOUSTIC.toString(), Guitar.Wood.BRAZILIAN_ROSEWOOD.toString(), Guitar.Wood.CEDAR.toString());
         inventoryRepository.addGuitar(testGuitar1);
         inventoryRepository.addGuitar(testGuitar2);
-        List<Guitar> result = inventoryRepository.search(new Guitar(null, 0.0, "Taylor", null, "Acoustic", null, null));
+        List<Guitar> result = inventoryRepository.search(new Guitar(null, 0.0, Guitar.Builder.RYAN.toString(), null, Guitar.Type.ACOUSTIC.toString(), null, null));
         assertEquals(1, result.size());
-        assertEquals(testGuitar1, result.get(0));
+        assertEquals(testGuitar2, result.get(0));
     }
 
     @Test
     public void testSearchNoMatch() throws IOException {
-        List<Guitar> result = inventoryRepository.search(new Guitar(null, 0.0, "Fender", null, "Electric", null, null));
+        List<Guitar> result = inventoryRepository.search(new Guitar(null, 0.0, Guitar.Builder.FENDER.toString(), null, Guitar.Type.ELECTRIC.toString(), null, null));
         assertEquals(0, result.size());
     }
 }
