@@ -1,18 +1,14 @@
 package jwrohn.iu.edu.Homework2.model;
-import java.util.Objects;
-
 public class Guitar {
-
     private String serialNumber;
-    private double price;
-    private String builder;
+    private Double price;
+    private Builder builder;
     private String model;
-    private String type;
-    private String backWood;
-    private String topWood;
+    private Type type;
+    private Wood backWood;
+    private Wood topWood;
 
-
-    public Guitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
+    public Guitar(String serialNumber, Double price, Builder builder, String model, Type type, Wood backWood, Wood topWood){
         this.serialNumber = serialNumber;
         this.price = price;
         this.builder = builder;
@@ -24,121 +20,59 @@ public class Guitar {
 
 
     public String getSerialNumber() {
-        return serialNumber;
+        return this.serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
+    public Double getPrice() {
+        return this.price;
     }
 
-    public double getPrice() {
-        return price;
+    public Builder getBuilder(){
+        return this.builder;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    // returns string val of model
+    public String getModel(){
+        return this.model;
     }
 
-    public String getBuilder() {
-        return builder;
+    public Type getType(){
+        return this.type;
     }
 
-    public void setBuilder(String builder) {
-        this.builder = builder;
+    public Wood getBackWood(){
+        return this.backWood;
     }
 
-    public String getModel() {
-        return model;
+    public Wood getTopWood(){
+        return this.topWood;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getBackWood() {
-        return backWood;
-    }
-
-    public void setBackWood(String backWood) {
-        this.backWood = backWood;
-    }
-
-    public String getTopWood() {
-        return topWood;
-    }
-
-    public void setTopWood(String topWood) {
-        this.topWood = topWood;
-    }
-    public enum Builder{
-        FENDER, MARTIN,GIBSON,COLLINGS,OLSON,RYAN,PRS,ANY;
-
-        @Override
-        public String toString() {
-            switch(this){
-                case FENDER:    return "Fender";
-                case MARTIN:    return "Martin";
-                case GIBSON:    return "Gibson";
-                case COLLINGS:  return "Collings";
-                case OLSON:     return "Olson";
-                case RYAN:      return "Ryan";
-                case PRS:       return "PRS";
-                default:        return "Unspecified";
-            }
-        }
-    }
-    public enum Type{
-        ACOUSTIC,ELECTRIC;
-
-        @Override
-        public String toString() {
-            switch (this){
-                case ACOUSTIC:  return "acoustic";
-                case ELECTRIC:  return  "electric";
-                default:        return "unspecified";
-            }
-        }
-    }
-    public enum Wood{
-        INDIAN_ROSEWOOD, BRAZILIAN_ROSEWOOD, MAHOGANY, MAPLE, COCOBOLO,CEDAR,ADIRONDACK,ALDER,SITKA;
-        public String toString(){
-            switch(this){
-                case INDIAN_ROSEWOOD: return "Indian Rosewood";
-                case BRAZILIAN_ROSEWOOD:    return "Brazilian Rosewood";
-                case MAHOGANY:  return  "Mahogany";
-                case MAPLE: return "Maple";
-                case COCOBOLO:  return "Cocobolo";
-                case CEDAR:     return  "Cedar";
-                case ADIRONDACK:    return "Adirondack";
-                case ALDER:     return "Alder";
-                case SITKA:     return "Sitka";
-                default:    return  "Unspecified";
-
-            }
-        }
-    }
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
+    public boolean isSame(Guitar other) {
+        if (other == null) {
             return false;
         }
-        Guitar other = (Guitar) obj;
-        return Double.compare(other.price, price) == 0 &&
-                Objects.equals(serialNumber, other.serialNumber) &&
-                Objects.equals(builder, other.builder) &&
-                Objects.equals(model, other.model) &&
-                Objects.equals(type, other.type) &&
-                Objects.equals(backWood, other.backWood) &&
-                Objects.equals(topWood, other.topWood);
+        if (this.serialNumber != null && !this.serialNumber.equals(other.getSerialNumber())) {
+            return false;
+        }
+        if (this.price != null && !this.price.equals(other.getPrice())) {
+            return false;
+        }
+        if (this.builder != null && !this.builder.equals(other.getBuilder())) {
+            return false;
+        }
+        if (this.model != null && !this.model.equals(other.getModel())) {
+            return false;
+        }
+        if (this.type != null && !this.type.equals(other.getType())) {
+            return false;
+        }
+        if (this.backWood != null && !this.backWood.equals(other.getBackWood())) {
+            return false;
+        }
+        if (this.topWood != null && !this.topWood.equals(other.getTopWood())) {
+            return false;
+        }
+        return true;
     }
 }
