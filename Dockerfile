@@ -1,4 +1,4 @@
 FROM eclipse-temurin:17
 WORKDIR /home
-COPY ./target/Homework2-0.0.1.jar Homework2.jar
-ENTRYPOINT ["java", "-jar", "Homework2.jar"]
+COPY ./target/Homework2-0.0.1-SNAPSHOT.jar guitar-inventory-management.jar
+ENTRYPOINT ["java", "-jar", "guitar-inventory-management.jar"]
