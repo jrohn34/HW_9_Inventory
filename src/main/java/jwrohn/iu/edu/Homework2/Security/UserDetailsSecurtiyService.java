@@ -17,18 +17,20 @@ public class UserDetailsSecurtiyService implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException{
-        try{
-            Customer customer = customerRepository.findByUsername(username);
-            if (customer == null) {
+            throws UsernameNotFoundException {
+        try {
+            Customer customer =
+                    customerRepository.findByUsername(username);
+            if(customer == null) {
                 throw new UsernameNotFoundException("");
             }
             return User
                     .withUsername(username)
-                    .password(customer.password())
+                    .password(customer.getPassword())
                     .build();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 }
+
